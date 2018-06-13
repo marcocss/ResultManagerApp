@@ -12,20 +12,25 @@ namespace ResultManagerApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class equipo
+    public partial class persona
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public equipo()
+        public persona()
         {
-            this.jugadors = new HashSet<jugador>();
+            this.equipoes = new HashSet<equipo>();
+            this.torneos = new HashSet<torneo>();
         }
     
-        public int idEquipo { get; set; }
-        public string nombre { get; set; }
         public int idPersona { get; set; }
+        public string nombres { get; set; }
+        public string apellidos { get; set; }
+        public string telefono { get; set; }
+        public int idRol { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<jugador> jugadors { get; set; }
-        public virtual persona persona { get; set; }
+        public virtual ICollection<equipo> equipoes { get; set; }
+        public virtual rol rol { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<torneo> torneos { get; set; }
     }
 }

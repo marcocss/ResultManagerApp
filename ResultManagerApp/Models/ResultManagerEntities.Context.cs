@@ -26,5 +26,9 @@ namespace ResultManagerApp.Models
         }
     
         public virtual DbSet<equipo> equipoes { get; set; }
+        public virtual DbSet<jugador> jugadors { get; set; }
+        public virtual DbSet<persona> personas { get; set; }
+        public virtual DbSet<rol> rols { get; set; }
+        public virtual DbSet<torneo> torneos { get; set; }
     }
 }

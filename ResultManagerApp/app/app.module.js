@@ -15,16 +15,17 @@ var app_component_1 = require("./app.component");
 var ng2_bs3_modal_1 = require("ng2-bs3-modal/ng2-bs3-modal");
 var app_routing_1 = require("./app.routing");
 var home_component_1 = require("./components/home.component");
-var equipo_service_1 = require("./Services/equipo.service");
+var service_1 = require("./Services/service");
 var equipo_component_1 = require("./components/equipo.component");
+var rol_component_1 = require("./components/rol.component");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule, forms_1.ReactiveFormsModule, http_1.HttpModule, app_routing_1.routing, ng2_bs3_modal_1.Ng2Bs3ModalModule],
-            declarations: [app_component_1.AppComponent, home_component_1.HomeComponent, equipo_component_1.EquipoComponent],
-            providers: [{ provide: common_1.APP_BASE_HREF, useValue: '/' }, equipo_service_1.EquipoService],
+            declarations: [app_component_1.AppComponent, home_component_1.HomeComponent, equipo_component_1.EquipoComponent, rol_component_1.RolComponent],
+            providers: [{ provide: common_1.APP_BASE_HREF, useValue: '/' }, service_1.GeneralService],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);

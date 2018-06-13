@@ -6,7 +6,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
-export class EquipoService {
+export class GeneralService {
     constructor(private _http: Http) { }
 
     get(url: string): Observable<any> {

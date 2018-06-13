@@ -174,10 +174,17 @@
     <Compile Include="Controllers\BaseAPIController.cs" />
     <Compile Include="Controllers\EquipoAPIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RolAPIController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\equipo.cs">
+      <DependentUpon>ResultManagerEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\jugador.cs">
+      <DependentUpon>ResultManagerEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\persona.cs">
       <DependentUpon>ResultManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ResultManagerEntities.Context.cs">
@@ -195,10 +202,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ResultManagerEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\rol.cs">
+      <DependentUpon>ResultManagerEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\torneo.cs">
+      <DependentUpon>ResultManagerEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\Components\equipo.component.html" />
+    <Content Include="app\Components\rol.component.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -209,8 +223,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Models\ResultManagerEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ResultManagerEntities.Context.cs</LastGenOutput>
       <DependentUpon>ResultManagerEntities.edmx</DependentUpon>
+      <LastGenOutput>ResultManagerEntities.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\ResultManagerEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -284,9 +298,11 @@
     <TypeScriptCompile Include="app\app.routing.ts" />
     <TypeScriptCompile Include="app\Components\equipo.component.ts" />
     <TypeScriptCompile Include="app\Components\home.component.ts" />
+    <TypeScriptCompile Include="app\Components\rol.component.ts" />
     <TypeScriptCompile Include="app\main.ts" />
     <TypeScriptCompile Include="app\Models\equipos.ts" />
-    <TypeScriptCompile Include="app\Services\equipo.service.ts" />
+    <TypeScriptCompile Include="app\Models\roles.ts" />
+    <TypeScriptCompile Include="app\Services\service.ts" />
     <TypeScriptCompile Include="app\shared\enum.ts" />
     <TypeScriptCompile Include="app\shared\global.ts" />
   </ItemGroup>

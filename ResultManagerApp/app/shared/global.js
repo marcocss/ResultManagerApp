@@ -4,6 +4,7 @@ var Global = /** @class */ (function () {
     function Global() {
     }
     Global.BASE_EQUIPO_ENDPOINT = 'api/equipoapi/';
+    Global.BASE_ROL_ENDPOINT = 'api/rolapi/';
     return Global;
 }());
 exports.Global = Global;

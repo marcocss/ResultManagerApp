@@ -2,79 +2,80 @@
 import { GeneralService } from '../Services/service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
-import { IEquipo } from '../Models/equipos';
+import { IRol } from '../Models/roles';
 import { DBOperation } from '../Shared/enum';
 import { Observable } from 'rxjs/Rx';
 import { Global } from '../Shared/global';
 
 @Component({
 
-    templateUrl: 'app/Components/equipo.component.html'
+    templateUrl: 'app/Components/rol.component.html'
 
 })
 
-export class EquipoComponent implements OnInit {
+export class RolComponent implements OnInit {
     @ViewChild('modal') modal: ModalComponent;
-    equipos: IEquipo[];
-    equipo: IEquipo;
+    roles: IRol[];
+    rol: IRol;
     msg: string;
     indLoading: boolean = false;
-    equipoFrm: FormGroup;
+    rolFrm: FormGroup;
     dbops: DBOperation;
     modalTitle: string;
     modalBtnTitle: string;
 
-    constructor(private fb: FormBuilder, private _equipoService: GeneralService) { }
+    constructor(private fb: FormBuilder, private _rolService: GeneralService) { }
 
     ngOnInit(): void {
-        this.equipoFrm = this.fb.group({
-            idEquipo: [''],
+        this.rolFrm = this.fb.group({
+            idRol: [''],
             nombre: ['', Validators.required],
-            encargado: ['', Validators.required],
-            telefono: ['', Validators.required]
+            personas: {}
         });
 
-        this.LoadEquipos();
+        this.LoadRoles();
     }
 
-    LoadEquipos(): void {
+    LoadRoles(): void {
         this.indLoading = true;
-        this._equipoService.get(Global.BASE_EQUIPO_ENDPOINT)
-            .subscribe(equipos => { this.equipos = equipos; this.indLoading = false; },
+        this._rolService.get(Global.BASE_ROL_ENDPOINT)
+            .subscribe(roles => { this.roles = roles; this.indLoading = false; },
                 error => this.msg = <any>error);
     }
 
-    addEquipo() {
+    addRoles() {
         this.dbops = DBOperation.create;
         this.SetControlsState(true);
-        this.modalTitle = "Agregar Equipo";
+        this.modalTitle = "Agregar Rol";
         this.modalBtnTitle = "Agregar";
-        this.equipoFrm.reset();
+        this.rolFrm.reset();
         this.modal.open();
     }
 
-    editEquipo(id: number) {
+    editRoles(id: number) {
         this.dbops = DBOperation.update;
         this.SetControlsState(true);
-        this.modalTitle = "Actualizar Equipo";
+        this.modalTitle = "Actualizar Rol";
         this.modalBtnTitle = "Actualizar";
-        this.equipo = this.equipos.filter(x => x.idEquipo == id)[0];
-        this.equipoFrm.setValue(this.equipo);
+        this.rol = this.roles.filter(x => x.idRol == id)[0];
+        this.rol.personas = {};
+        this.rolFrm.setValue(this.rol);      
         this.modal.open();
     }
 
-    deleteEquipo(id: number) {
+    deleteRoles(id: number) {
         this.dbops = DBOperation.delete;
         this.SetControlsState(false);
         this.modalTitle = "Esta seguro que desea eliminar?";
         this.modalBtnTitle = "Eliminar";
-        this.equipo = this.equipos.filter(x => x.idEquipo == id)[0];
-        this.equipoFrm.setValue(this.equipo);
+        this.rol = this.roles.filter(x => x.idRol == id)[0];
+        this.rol.personas = {};
+        this.rolFrm.setValue(this.rol);      
         this.modal.open();
     }
 
     SetControlsState(isEnable: boolean) {
-        isEnable ? this.equipoFrm.enable() : this.equipoFrm.disable();
+        isEnable ? this.rolFrm.enable() : this.rolFrm.disable();
     }
 
     onSubmit(formData: any) {
@@ -82,12 +83,12 @@ export class EquipoComponent implements OnInit {
 
         switch (this.dbops) {
             case DBOperation.create:
-                this._equipoService.post(Global.BASE_EQUIPO_ENDPOINT, formData._value).subscribe(
+                this._rolService.post(Global.BASE_ROL_ENDPOINT, formData._value).subscribe(
                     data => {
                         if (data == 1) //Success
                         {
-                            this.msg = "Equipo creado exitosamente!";
-                            this.LoadEquipos();
+                            this.msg = "Rol creado exitosamente!";
+                            this.LoadRoles();
                         }
                         else {
                             this.msg = "There is some issue in saving records, please contact to system administrator!"
@@ -101,12 +102,12 @@ export class EquipoComponent implements OnInit {
                 );
                 break;
             case DBOperation.update:
-                this._equipoService.put(Global.BASE_EQUIPO_ENDPOINT, formData._value.idEquipo, formData._value).subscribe(
+                this._rolService.put(Global.BASE_ROL_ENDPOINT, formData._value.idRol, formData._value).subscribe(
                     data => {
                         if (data == 1) //Success
                         {
-                            this.msg = "Equipo actualizado exitosamente!";
-                            this.LoadEquipos();
+                            this.msg = "Rol actualizado exitosamente!";
+                            this.LoadRoles();
                         }
                         else {
                             this.msg = "There is some issue in saving records, please contact to system administrator!"
@@ -120,12 +121,12 @@ export class EquipoComponent implements OnInit {
                 );
                 break;
             case DBOperation.delete:
-                this._equipoService.delete(Global.BASE_EQUIPO_ENDPOINT, formData._value.idEquipo).subscribe(
+                this._rolService.delete(Global.BASE_EQUIPO_ENDPOINT, formData._value.idRol).subscribe(
                     data => {
                         if (data == 1) //Success
                         {
-                            this.msg = "Equipo eliminado exitosamente!";
-                            this.LoadEquipos();
+                            this.msg = "Rol eliminado exitosamente!";
+                            this.LoadRoles();
                         }
                         else {
                             this.msg = "There is some issue in saving records, please contact to system administrator!"

@@ -15,66 +15,67 @@ var forms_1 = require("@angular/forms");
 var ng2_bs3_modal_1 = require("ng2-bs3-modal/ng2-bs3-modal");
 var enum_1 = require("../Shared/enum");
 var global_1 = require("../Shared/global");
-var EquipoComponent = /** @class */ (function () {
-    function EquipoComponent(fb, _equipoService) {
+var RolComponent = /** @class */ (function () {
+    function RolComponent(fb, _rolService) {
         this.fb = fb;
-        this._equipoService = _equipoService;
+        this._rolService = _rolService;
         this.indLoading = false;
     }
-    EquipoComponent.prototype.ngOnInit = function () {
-        this.equipoFrm = this.fb.group({
-            idEquipo: [''],
+    RolComponent.prototype.ngOnInit = function () {
+        this.rolFrm = this.fb.group({
+            idRol: [''],
             nombre: ['', forms_1.Validators.required],
-            encargado: ['', forms_1.Validators.required],
-            telefono: ['', forms_1.Validators.required]
+            personas: {}
         });
-        this.LoadEquipos();
+        this.LoadRoles();
     };
-    EquipoComponent.prototype.LoadEquipos = function () {
+    RolComponent.prototype.LoadRoles = function () {
         var _this = this;
         this.indLoading = true;
-        this._equipoService.get(global_1.Global.BASE_EQUIPO_ENDPOINT)
-            .subscribe(function (equipos) { _this.equipos = equipos; _this.indLoading = false; }, function (error) { return _this.msg = error; });
+        this._rolService.get(global_1.Global.BASE_ROL_ENDPOINT)
+            .subscribe(function (roles) { _this.roles = roles; _this.indLoading = false; }, function (error) { return _this.msg = error; });
     };
-    EquipoComponent.prototype.addEquipo = function () {
+    RolComponent.prototype.addRoles = function () {
         this.dbops = enum_1.DBOperation.create;
         this.SetControlsState(true);
-        this.modalTitle = "Agregar Equipo";
+        this.modalTitle = "Agregar Rol";
         this.modalBtnTitle = "Agregar";
-        this.equipoFrm.reset();
+        this.rolFrm.reset();
         this.modal.open();
     };
-    EquipoComponent.prototype.editEquipo = function (id) {
+    RolComponent.prototype.editRoles = function (id) {
         this.dbops = enum_1.DBOperation.update;
         this.SetControlsState(true);
-        this.modalTitle = "Actualizar Equipo";
+        this.modalTitle = "Actualizar Rol";
         this.modalBtnTitle = "Actualizar";
-        this.equipo = this.equipos.filter(function (x) { return x.idEquipo == id; })[0];
-        this.equipoFrm.setValue(this.equipo);
+        this.rol = this.roles.filter(function (x) { return x.idRol == id; })[0];
+        this.rol.personas = {};
+        this.rolFrm.setValue(this.rol);
         this.modal.open();
     };
-    EquipoComponent.prototype.deleteEquipo = function (id) {
+    RolComponent.prototype.deleteRoles = function (id) {
         this.dbops = enum_1.DBOperation.delete;
         this.SetControlsState(false);
         this.modalTitle = "Esta seguro que desea eliminar?";
         this.modalBtnTitle = "Eliminar";
-        this.equipo = this.equipos.filter(function (x) { return x.idEquipo == id; })[0];
-        this.equipoFrm.setValue(this.equipo);
+        this.rol = this.roles.filter(function (x) { return x.idRol == id; })[0];
+        this.rol.personas = {};
+        this.rolFrm.setValue(this.rol);
         this.modal.open();
     };
-    EquipoComponent.prototype.SetControlsState = function (isEnable) {
-        isEnable ? this.equipoFrm.enable() : this.equipoFrm.disable();
+    RolComponent.prototype.SetControlsState = function (isEnable) {
+        isEnable ? this.rolFrm.enable() : this.rolFrm.disable();
     };
-    EquipoComponent.prototype.onSubmit = function (formData) {
+    RolComponent.prototype.onSubmit = function (formData) {
         var _this = this;
         this.msg = "";
         switch (this.dbops) {
             case enum_1.DBOperation.create:
-                this._equipoService.post(global_1.Global.BASE_EQUIPO_ENDPOINT, formData._value).subscribe(function (data) {
+                this._rolService.post(global_1.Global.BASE_ROL_ENDPOINT, formData._value).subscribe(function (data) {
                     if (data == 1) //Success
                      {
-                        _this.msg = "Equipo creado exitosamente!";
-                        _this.LoadEquipos();
+                        _this.msg = "Rol creado exitosamente!";
+                        _this.LoadRoles();
                     }
                     else {
                         _this.msg = "There is some issue in saving records, please contact to system administrator!";
@@ -85,11 +86,11 @@ var EquipoComponent = /** @class */ (function () {
                 });
                 break;
             case enum_1.DBOperation.update:
-                this._equipoService.put(global_1.Global.BASE_EQUIPO_ENDPOINT, formData._value.idEquipo, formData._value).subscribe(function (data) {
+                this._rolService.put(global_1.Global.BASE_ROL_ENDPOINT, formData._value.idRol, formData._value).subscribe(function (data) {
                     if (data == 1) //Success
                      {
-                        _this.msg = "Equipo actualizado exitosamente!";
-                        _this.LoadEquipos();
+                        _this.msg = "Rol actualizado exitosamente!";
+                        _this.LoadRoles();
                     }
                     else {
                         _this.msg = "There is some issue in saving records, please contact to system administrator!";
@@ -100,11 +101,11 @@ var EquipoComponent = /** @class */ (function () {
                 });
                 break;
             case enum_1.DBOperation.delete:
-                this._equipoService.delete(global_1.Global.BASE_EQUIPO_ENDPOINT, formData._value.idEquipo).subscribe(function (data) {
+                this._rolService.delete(global_1.Global.BASE_EQUIPO_ENDPOINT, formData._value.idRol).subscribe(function (data) {
                     if (data == 1) //Success
                      {
-                        _this.msg = "Equipo eliminado exitosamente!";
-                        _this.LoadEquipos();
+                        _this.msg = "Rol eliminado exitosamente!";
+                        _this.LoadRoles();
                     }
                     else {
                         _this.msg = "There is some issue in saving records, please contact to system administrator!";
@@ -119,14 +120,14 @@ var EquipoComponent = /** @class */ (function () {
     __decorate([
         core_1.ViewChild('modal'),
         __metadata("design:type", ng2_bs3_modal_1.ModalComponent)
-    ], EquipoComponent.prototype, "modal", void 0);
-    EquipoComponent = __decorate([
+    ], RolComponent.prototype, "modal", void 0);
+    RolComponent = __decorate([
         core_1.Component({
-            templateUrl: 'app/Components/equipo.component.html'
+            templateUrl: 'app/Components/rol.component.html'
         }),
         __metadata("design:paramtypes", [forms_1.FormBuilder, service_1.GeneralService])
-    ], EquipoComponent);
-    return EquipoComponent;
+    ], RolComponent);
+    return RolComponent;
 }());
-exports.EquipoComponent = EquipoComponent;
-//# sourceMappingURL=equipo.component.js.map
+exports.RolComponent = RolComponent;
+//# sourceMappingURL=rol.component.js.map

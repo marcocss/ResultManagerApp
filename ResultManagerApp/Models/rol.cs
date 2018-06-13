@@ -9,23 +9,23 @@
 
 namespace ResultManagerApp.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
-    public partial class equipo
+    public partial class rol
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public equipo()
+        public rol()
         {
-            this.jugadors = new HashSet<jugador>();
+            this.personas = new HashSet<persona>();
         }
     
-        public int idEquipo { get; set; }
+        public int idRol { get; set; }
         public string nombre { get; set; }
-        public int idPersona { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<jugador> jugadors { get; set; }
-        public virtual persona persona { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<persona> personas { get; set; }
     }
 }

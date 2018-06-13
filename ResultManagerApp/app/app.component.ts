@@ -8,6 +8,7 @@
                          <ul class='nav navbar-nav'>
                            <li><a [routerLink]="['home']">Inicio</a></li>
                            <li><a [routerLink]="['equipo']">Equipos</a></li>
+                           <li><a [routerLink]="['rol']">Roles</a></li>
                       </ul>
                       </div>
                  </nav>    

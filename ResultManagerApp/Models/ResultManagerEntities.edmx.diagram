@@ -4,8 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5a79628c292148c284661b79f65eed18" Name="Diagram1">
-        <EntityTypeShape EntityType="ResultManagerModel.equipo" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="d9376a00c26d467a94b3059aa05af62e" Name="Diagram1">
+        <EntityTypeShape EntityType="ResultManagerModel.equipo" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ResultManagerModel.jugador" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ResultManagerModel.persona" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ResultManagerModel.rol" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ResultManagerModel.torneo" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="ResultManagerModel.fk_idEquipo" ManuallyRouted="false" />
+        <AssociationConnector Association="ResultManagerModel.fk_idPersona" ManuallyRouted="false" />
+        <AssociationConnector Association="ResultManagerModel.fk_idRol" ManuallyRouted="false" />
+        <AssociationConnector Association="ResultManagerModel.fk_Persona" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
